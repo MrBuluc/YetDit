@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public int UpVoteCount { get; set; }
         public string UserId { get; set; }
-        public IEnumerable<object> Comments { get; set; }
+        public object Comments { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTimeOffset? UpdatedOn { get; set;}
     }

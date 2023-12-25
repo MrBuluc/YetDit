@@ -18,8 +18,8 @@ namespace YetDit.Application.Features.Commands.Post.UpdatePost
             Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
             if (!post.IsDeleted)
             {
-                post.Title = request.Title;
-                post.Description = request.Description;
+                post.Title = request.Title == "" ? post.Title : request.Title;
+                post.Description = request.Description == "" ? post.Description : request.Description;
                 post.ModifiedOn = DateTime.UtcNow;
                 post.ModifiedByUserId = request.UserId;
                 await _writeRepository.SaveAsync();

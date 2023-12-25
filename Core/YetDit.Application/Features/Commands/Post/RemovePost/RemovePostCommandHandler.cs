@@ -21,7 +21,7 @@ namespace YetDit.Application.Features.Commands.Post.RemovePost
             post.DeletedOn = DateTime.UtcNow;
             post.IsDeleted = true;
             await _writeRepository.SaveAsync();
-            return new RemovePostCommandResponse()
+            return new()
             {
                 Succeeded = true,
             };
