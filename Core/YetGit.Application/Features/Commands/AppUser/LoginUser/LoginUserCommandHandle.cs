@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using YetGit.Application.Abstractions.Services.Authentications;
+using YetDit.Application.Abstractions.Services.Authentications;
 
-namespace YetGit.Application.Features.Commands.AppUser.LoginUser
+namespace YetDit.Application.Features.Commands.AppUser.LoginUser
 {
     public class LoginUserCommandHandle : IRequestHandler<LoginUserCommandRequest, LoginUserCommandResponse>
     {

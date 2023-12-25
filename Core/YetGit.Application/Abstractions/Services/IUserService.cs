@@ -1,6 +1,6 @@
-﻿using YetGit.Application.DTOs.User;
+﻿using YetDit.Application.DTOs.User;
 
-namespace YetGit.Application.Abstractions.Services
+namespace YetDit.Application.Abstractions.Services
 {
     public interface IUserService
     {

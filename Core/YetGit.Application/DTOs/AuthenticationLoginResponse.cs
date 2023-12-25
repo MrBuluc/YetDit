@@ -1,4 +1,4 @@
-﻿namespace YetGit.Application.DTOs
+﻿namespace YetDit.Application.DTOs
 {
     public class AuthenticationLoginResponse
     {

@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using YetGit.Application.DTOs.User;
+using YetDit.Application.DTOs.User;
 
-namespace YetGit.Application.Features.Commands.AppUser.CreateUser
+namespace YetDit.Application.Features.Commands.AppUser.CreateUser
 {
     public class CreateUserCommandResponse : IRequest<CreateUserCommandRequest>
     {

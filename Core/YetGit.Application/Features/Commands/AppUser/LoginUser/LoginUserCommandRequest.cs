@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace YetGit.Application.Features.Commands.AppUser.LoginUser
+namespace YetDit.Application.Features.Commands.AppUser.LoginUser
 {
     public class LoginUserCommandRequest : IRequest<LoginUserCommandResponse>
     {

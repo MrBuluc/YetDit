@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{02D9945A-E118-4180-A425-5429C40BC7DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YetGit.Application", "Core\YetGit.Application\YetGit.Application.csproj", "{CD06712B-49F5-44C4-ACD9-25837E1D9DCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YetDit.Application", "Core\YetGit.Application\YetDit.Application.csproj", "{CD06712B-49F5-44C4-ACD9-25837E1D9DCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

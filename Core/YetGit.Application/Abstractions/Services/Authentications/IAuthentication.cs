@@ -1,6 +1,6 @@
-﻿using YetGit.Application.DTOs;
+﻿using YetDit.Application.DTOs;
 
-namespace YetGit.Application.Abstractions.Services.Authentications
+namespace YetDit.Application.Abstractions.Services.Authentications
 {
     public interface IAuthentication
     {

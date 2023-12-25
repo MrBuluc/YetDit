@@ -1,4 +1,4 @@
-﻿namespace YetGit.Application.DTOs.User
+﻿namespace YetDit.Application.DTOs.User
 {
     public class CreateUserModel
     {

@@ -1,6 +1,6 @@
-﻿using YetGit.Application.DTOs;
+﻿using YetDit.Application.DTOs;
 
-namespace YetGit.Application.Features.Commands.AppUser.LoginUser
+namespace YetDit.Application.Features.Commands.AppUser.LoginUser
 {
     public class LoginUserCommandResponse
     {
