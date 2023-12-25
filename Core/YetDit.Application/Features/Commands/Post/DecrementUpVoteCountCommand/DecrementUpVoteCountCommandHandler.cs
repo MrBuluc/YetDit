@@ -17,14 +17,21 @@ namespace YetDit.Application.Features.Commands.Post.DecrementUpVoteCountCommand
         public async Task<DecrementUpVoteCountCommandResponse> Handle(DecrementUpVoteCountCommandRequest request, CancellationToken cancellationToken)
         {
             Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
-            post.UpVoteCount--;
-            post.ModifiedByUserId = request.UserId;
-            post.ModifiedOn = DateTime.UtcNow;
-            await _writeRepository.SaveAsync();
+            if (!post.IsDeleted)
+            {
+                post.UpVoteCount--;
+                post.ModifiedByUserId = request.UserId;
+                post.ModifiedOn = DateTime.UtcNow;
+                await _writeRepository.SaveAsync();
+                return new()
+                {
+                    Succeeded = true,
+                    NewUpVoteCount = post.UpVoteCount
+                };
+            }
             return new()
             {
-                Succeeded = true,
-                NewUpVoteCount = post.UpVoteCount
+                Succeeded = false
             };
         }
     }

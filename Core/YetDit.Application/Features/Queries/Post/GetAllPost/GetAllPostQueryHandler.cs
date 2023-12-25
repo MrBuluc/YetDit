@@ -14,7 +14,7 @@ namespace YetDit.Application.Features.Queries.Post.GetAllPost
 
         public Task<GetAllPostQueryResponse> Handle(GetAllPostQueryRequest request, CancellationToken cancellationToken)
         {
-            var posts = _readRepository.GetAll().Select(p => new
+            var posts = _readRepository.GetWhere(p => p.IsDeleted == false).Select(p => new
             {
                 p.Id,
                 p.Title,

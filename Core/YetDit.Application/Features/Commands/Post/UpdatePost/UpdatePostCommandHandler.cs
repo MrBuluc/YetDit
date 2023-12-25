@@ -16,14 +16,21 @@ namespace YetDit.Application.Features.Commands.Post.UpdatePost
         public async Task<UpdatePostCommandResponse> Handle(UpdatePostCommandRequest request, CancellationToken cancellationToken)
         {
             Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
-            post.Title = request.Title;
-            post.Description = request.Description;
-            post.ModifiedOn = DateTime.UtcNow;
-            post.ModifiedByUserId = request.UserId;
-            await _writeRepository.SaveAsync();
+            if (!post.IsDeleted)
+            {
+                post.Title = request.Title;
+                post.Description = request.Description;
+                post.ModifiedOn = DateTime.UtcNow;
+                post.ModifiedByUserId = request.UserId;
+                await _writeRepository.SaveAsync();
+                return new()
+                {
+                    Succeeded = true,
+                };
+            }
             return new()
             {
-                Succeeded = true,
+                Succeeded = false
             };
         }
     }
