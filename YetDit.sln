@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{02D9945A-E118-4180-A425-5429C40BC7DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YetDit.Application", "Core\YetGit.Application\YetDit.Application.csproj", "{CD06712B-49F5-44C4-ACD9-25837E1D9DCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YetDit.Domain", "Core\YetDit.Domain\YetDit.Domain.csproj", "{E1C4E1A1-39FF-4236-86B8-B1CCC6A2307A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YetDit.Application", "Core\YetDit.Application\YetDit.Application.csproj", "{74656525-5459-422A-BA63-CF6E84E9317D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +15,21 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CD06712B-49F5-44C4-ACD9-25837E1D9DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD06712B-49F5-44C4-ACD9-25837E1D9DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD06712B-49F5-44C4-ACD9-25837E1D9DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD06712B-49F5-44C4-ACD9-25837E1D9DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C4E1A1-39FF-4236-86B8-B1CCC6A2307A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C4E1A1-39FF-4236-86B8-B1CCC6A2307A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C4E1A1-39FF-4236-86B8-B1CCC6A2307A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C4E1A1-39FF-4236-86B8-B1CCC6A2307A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74656525-5459-422A-BA63-CF6E84E9317D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74656525-5459-422A-BA63-CF6E84E9317D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74656525-5459-422A-BA63-CF6E84E9317D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74656525-5459-422A-BA63-CF6E84E9317D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CD06712B-49F5-44C4-ACD9-25837E1D9DCE} = {02D9945A-E118-4180-A425-5429C40BC7DA}
+		{E1C4E1A1-39FF-4236-86B8-B1CCC6A2307A} = {02D9945A-E118-4180-A425-5429C40BC7DA}
+		{74656525-5459-422A-BA63-CF6E84E9317D} = {02D9945A-E118-4180-A425-5429C40BC7DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F867F679-9FB1-41D0-913B-08AD6265FE5D}

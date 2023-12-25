@@ -10,6 +10,8 @@ namespace YetDit.Application.Features.Commands.AppUser.CreateUser
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public int Gender { get; set; }
+        public string ProfilePictureUrl { get; set; }
 
         public static implicit operator CreateUserModel(CreateUserCommandRequest request) => new()
         {
@@ -17,7 +19,9 @@ namespace YetDit.Application.Features.Commands.AppUser.CreateUser
             Surname = request.Surname,
             Username = request.Username,
             Email = request.Email,
-            Password = request.Password
+            Password = request.Password,
+            Gender = request.Gender,
+            ProfilePictureUrl = request.ProfilePictureUrl,
         };
     }
 }
