@@ -19,7 +19,9 @@ namespace YetDit.Application.Features.Commands.Post.CreatePost
             {
                 Title = request.Title,
                 Description = request.Description,
-                UserId = Guid.Parse(request.UserId)
+                UserId = Guid.Parse(request.UserId),
+                CreatedByUserId = request.UserId,
+                CreatedOn = DateTime.UtcNow,
             });
             await _writeRepository.SaveAsync();
             return new()
