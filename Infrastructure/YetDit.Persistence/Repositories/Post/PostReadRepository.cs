@@ -11,7 +11,7 @@ using YetDit.Persistence.Contexts;
 
 namespace YetDit.Persistence.Repositories.Post
 {
-    public class PostReadRepository : ReadRepository<YetDit.Domain.Entities.Post, Guid>, IPostReadRepository
+    public class PostReadRepository : ReadRepository<YetDit.Domain.Entities.Post, int>, IPostReadRepository
     {
         public PostReadRepository(YetDitDbContext context) : base(context)
         {

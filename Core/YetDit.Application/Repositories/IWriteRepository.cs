@@ -1,45 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Threading.Tasks;
-using YetDit.Application.Repositories;
-using YetDit.Domain.Common;
-using YetDit.Persistence.Contexts;
+﻿using YetDit.Domain.Common;
 
-namespace YetDit.Persistence.Repositories
+namespace YetDit.Application.Repositories
 {
-    public class WriteRepository<T, TId> : IWriteRepository<T, TId> where T : EntityBase<TId>
+    public interface IWriteRepository<T, TKey> : IRepository<T, TKey> where T : EntityBase<TKey>
     {
-        private readonly YetDitDbContext _context;
-
-        public WriteRepository(YetDitDbContext context)
-        {
-            _context = context;
-        }
-
-        public DbSet<T> Table => _context.Set<T>();
-
-        public async Task<TId> AddAsync(T entity)
-        {
-            EntityEntry<T> entityEntry = await Table.AddAsync(entity);
-            return entityEntry.Entity.Id;
-        }
-
-        public async Task<bool> RemoveAsync(TId id)
-        {
-            var entity = await Table.FindAsync(id);
-
-            if (entity != null)
-            {
-                var entityEntry = Table.Remove(entity);
-                return entityEntry.State == EntityState.Deleted;
-            }
-
-            return false;
-        }
-
-        public async Task<int> SaveAsync()
-        {
-            return await _context.SaveChangesAsync();
-        }
+        Task<TKey> AddAsync(T entity);
+        Task<bool> RemoveAsync(TKey id);
+        Task<int> SaveAsync();
     }
 }
