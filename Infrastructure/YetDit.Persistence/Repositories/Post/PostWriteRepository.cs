@@ -1,0 +1,18 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using YetDit.Application.Repositories.Post;
+using YetDit.Persistence.Contexts;
+
+namespace YetDit.Persistence.Repositories.Post
+{
+    public class PostWriteRepository : WriteRepository<YetDit.Domain.Entities.Post, int>, IPostWriteRepository
+    {
+        public PostWriteRepository(YetDitDbContext context) : base(context)
+        {
+        }
+    }
+}
