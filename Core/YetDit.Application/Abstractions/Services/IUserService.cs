@@ -1,4 +1,5 @@
 ﻿using YetDit.Application.DTOs.User;
+using YetDit.Domain.Identity;
 
 namespace YetDit.Application.Abstractions.Services
 {
