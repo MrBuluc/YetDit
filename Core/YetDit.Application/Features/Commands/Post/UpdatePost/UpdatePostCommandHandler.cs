@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using YetDit.Application.Exceptions;
 using YetDit.Application.Repositories.Post;
 
 namespace YetDit.Application.Features.Commands.Post.UpdatePost
@@ -18,15 +19,19 @@ namespace YetDit.Application.Features.Commands.Post.UpdatePost
             Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
             if (!post.IsDeleted)
             {
-                post.Title = request.Title == "" ? post.Title : request.Title;
-                post.Description = request.Description == "" ? post.Description : request.Description;
-                post.ModifiedOn = DateTime.UtcNow;
-                post.ModifiedByUserId = request.UserId;
-                await _writeRepository.SaveAsync();
-                return new()
+                if (post.UserId.ToString() == request.UserId)
                 {
-                    Succeeded = true,
-                };
+                    post.Title = request.Title == "" ? post.Title : request.Title;
+                    post.Description = request.Description == "" ? post.Description : request.Description;
+                    post.ModifiedOn = DateTime.UtcNow;
+                    post.ModifiedByUserId = request.UserId;
+                    await _writeRepository.SaveAsync();
+                    return new()
+                    {
+                        Succeeded = true,
+                    };
+                }
+                throw new NotBelongsToUserException("Post");
             }
             return new()
             {

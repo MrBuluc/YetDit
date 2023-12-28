@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using YetDit.Application.Exceptions;
 using YetDit.Application.Repositories.Post;
 
 namespace YetDit.Application.Features.Commands.Post.RemovePost
@@ -19,10 +20,14 @@ namespace YetDit.Application.Features.Commands.Post.RemovePost
             Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
             if (!post.IsDeleted)
             {
-                post.DeletedByUserId = request.UserId;
-                post.DeletedOn = DateTime.UtcNow;
-                post.IsDeleted = true;
-                await _writeRepository.SaveAsync();
+                if (post.UserId.ToString() == request.UserId)
+                {
+                    post.DeletedByUserId = request.UserId;
+                    post.DeletedOn = DateTime.UtcNow;
+                    post.IsDeleted = true;
+                    await _writeRepository.SaveAsync();
+                }
+                throw new NotBelongsToUserException("Comment");
             }
             return new()
             {
