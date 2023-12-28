@@ -19,6 +19,7 @@ namespace YetDit.Application.Features.Commands.Comment.CreateComment
             {
                 Content = request.Content,
                 UserId = Guid.Parse(request.UserId),
+                PostId = request.PostId,
                 CreatedByUserId = request.UserId
             });
             await _writeRepository.SaveAsync();

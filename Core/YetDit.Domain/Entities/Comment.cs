@@ -7,7 +7,11 @@ namespace YetDit.Domain.Entities
     {
         public string Content { get; set; }
         public int UpVoteCount { get; set; }
+        
         public AppUser User { get; set; }
         public Guid UserId { get; set; }
+
+        public Post Post { get; set; }
+        public int PostId { get; set; }
     }
 }
