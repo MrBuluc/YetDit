@@ -17,10 +17,13 @@ namespace YetDit.Application.Features.Commands.Post.RemovePost
         public async Task<RemovePostCommandResponse> Handle(RemovePostCommandRequest request, CancellationToken cancellationToken)
         {
             Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
-            post.DeletedByUserId = request.UserId;
-            post.DeletedOn = DateTime.UtcNow;
-            post.IsDeleted = true;
-            await _writeRepository.SaveAsync();
+            if (!post.IsDeleted)
+            {
+                post.DeletedByUserId = request.UserId;
+                post.DeletedOn = DateTime.UtcNow;
+                post.IsDeleted = true;
+                await _writeRepository.SaveAsync();
+            }
             return new()
             {
                 Succeeded = true,
