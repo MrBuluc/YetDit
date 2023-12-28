@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Threading.Tasks;
 using YetDit.Application.Repositories;
 using YetDit.Domain.Common;
 using YetDit.Persistence.Contexts;
@@ -28,7 +27,7 @@ namespace YetDit.Persistence.Repositories
         {
             var entity = await Table.FindAsync(id);
 
-            if (entity != null)
+            if (entity is not null)
             {
                 var entityEntry = Table.Remove(entity);
                 return entityEntry.State == EntityState.Deleted;

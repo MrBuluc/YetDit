@@ -19,8 +19,6 @@ namespace YetDit.Domain.Identity
         public string? DeletedByUserId { get; set; }
         public DateTimeOffset? DeletedOn { get; set; }
         public bool IsDeleted { get; set; }
-        public string? RefreshToken { get; set; }
-        public DateTime? RefreshTokenEndDate { get; set; }
 
         public ICollection<Post> Posts { get; set; }
     }

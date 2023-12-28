@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using YetDit.Application.Repositories;
 using YetDit.Domain.Common;
 using YetDit.Persistence.Contexts;
@@ -37,18 +34,8 @@ namespace YetDit.Persistence.Repositories
 
         public async Task<T> GetByIdAsync(string id)
         {
-            // Önce Id'yi TId türüne çevir
-            TId entityId = ConvertId(id);
-
             // Ardından eşleşen varlığı getir
-            return await Table.FirstOrDefaultAsync(data => EqualityComparer<TId>.Default.Equals(data.Id, entityId));
-        }
-
-        // Id'yi TId türüne çeviren yardımcı metot
-        private TId ConvertId(string id)
-        {
-            // Bu örnek sadece Guid tipini destekliyor, diğer türler için genişletilebilir
-            return (TId)(object)Guid.Parse(id);
+            return await Table.FirstOrDefaultAsync(data => data.Id.ToString() == id);
         }
     }
 }
