@@ -1,20 +1,20 @@
 ﻿using MediatR;
 using YetDit.Application.Repositories.Post;
 
-namespace YetDit.Application.Features.Commands.Post.DecrementUpVoteCountCommand
+namespace YetDit.Application.Features.Commands.Post.DecrementUpVoteCountPost
 {
-    public class DecrementUpVoteCountCommandHandler : IRequestHandler<DecrementUpVoteCountCommandRequest, DecrementUpVoteCountCommandResponse>
+    public class DecrementUpVoteCountPostCommandHandler : IRequestHandler<DecrementUpVoteCountPostCommandRequest, DecrementUpVoteCountPostCommandResponse>
     {
         private readonly IPostReadRepository _readRepository;
         private readonly IPostWriteRepository _writeRepository;
 
-        public DecrementUpVoteCountCommandHandler(IPostWriteRepository writeRepository, IPostReadRepository readRepository)
+        public DecrementUpVoteCountPostCommandHandler(IPostWriteRepository writeRepository, IPostReadRepository readRepository)
         {
             _writeRepository = writeRepository;
             _readRepository = readRepository;
         }
 
-        public async Task<DecrementUpVoteCountCommandResponse> Handle(DecrementUpVoteCountCommandRequest request, CancellationToken cancellationToken)
+        public async Task<DecrementUpVoteCountPostCommandResponse> Handle(DecrementUpVoteCountPostCommandRequest request, CancellationToken cancellationToken)
         {
             Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
             if (!post.IsDeleted)
