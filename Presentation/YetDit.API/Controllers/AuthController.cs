@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using YetDit.Application.Features.Commands.AppUser.LoginUser;
+using YetDit.Application.Features.Commands.AppUser.RefreshTokenLogin;
 
 namespace YetDit.API.Controllers
 {
@@ -14,6 +16,17 @@ namespace YetDit.API.Controllers
             _mediator = mediator;
         }
 
-
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(LoginUserCommandRequest loginUserCommandRequest)
+        {
+            LoginUserCommandResponse response = await _mediator.Send(loginUserCommandRequest);
+            return Ok(response);
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> RefreshTokenLogin([FromForm] RefreshTokenLoginCommandRequest refreshTokenLoginCommandRequest)
+        {
+            RefreshTokenLoginCommandResponse response = await _mediator.Send(refreshTokenLoginCommandRequest);
+            return Ok(response);
+        }
     }
 }
