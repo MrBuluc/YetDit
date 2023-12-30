@@ -10,7 +10,7 @@ namespace YetDit.Application.Validators.Comments
             RuleFor(c => c.Content)
                 .NotEmpty()
                 .WithMessage("Can't accept empty content value!")
-                .MaximumLength(3)
+                .MinimumLength(3)
                 .WithMessage("Please enter a value that is greater than 3 char!");
         }
     }

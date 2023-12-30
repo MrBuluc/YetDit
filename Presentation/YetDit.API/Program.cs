@@ -8,7 +8,7 @@ builder.Services.AddCors(options => { options.AddPolicy("AllowAll", builder => b
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices();
 
-//Todo builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>)
+//builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>)
 
 // Add services to the container.
 
