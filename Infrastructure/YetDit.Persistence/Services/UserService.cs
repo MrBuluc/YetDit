@@ -25,6 +25,7 @@ namespace YetDit.Persistence.Services
                 Surname = model.Surname,
                 UserName = model.Username,
                 Email = model.Email,
+                ProfilePictureUrl = model.ProfilePictureUrl,
                 CreatedByUserId = guid.ToString()
             }, model.Password);
 
