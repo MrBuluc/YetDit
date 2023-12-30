@@ -12,7 +12,7 @@ using YetDit.Persistence.Contexts;
 namespace YetDit.Persistence.Migrations
 {
     [DbContext(typeof(YetDitDbContext))]
-    [Migration("20231230172429_InitialCreate")]
+    [Migration("20231230193030_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -330,6 +330,12 @@ namespace YetDit.Persistence.Migrations
 
                     b.Property<string>("ProfilePictureUrl")
                         .HasColumnType("text");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("RefreshTokenEndDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");

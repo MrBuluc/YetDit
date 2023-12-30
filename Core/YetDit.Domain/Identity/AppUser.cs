@@ -11,6 +11,8 @@ namespace YetDit.Domain.Identity
         public string Surname { get; set; }
         public Gender Gender { get; set; }
         public string? ProfilePictureUrl { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenEndDate { get; set; }
 
         public string CreatedByUserId { get; set; }
         public DateTime CreatedOn { get; set; }
