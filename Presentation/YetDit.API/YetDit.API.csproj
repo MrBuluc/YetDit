@@ -4,6 +4,7 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>8ac8c205-d35c-4370-9a65-9be5f7691f07</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +22,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\YetDit.Application\YetDit.Application.csproj" />
+		<ProjectReference Include="..\..\Infrastructure\YetDit.Infrastructure\YetDit.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\Infrastructure\YetDit.Persistence\YetDit.Persistence.csproj" />
 	</ItemGroup>
 

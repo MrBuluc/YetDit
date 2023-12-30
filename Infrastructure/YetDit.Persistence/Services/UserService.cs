@@ -16,13 +16,15 @@ namespace YetDit.Persistence.Services
 
         public async Task<CreateUserResponse> CreateAsync(CreateUserModel model)
         {
+            Guid guid = Guid.NewGuid();
             IdentityResult identityResult = await _userManager.CreateAsync(new()
             {
-                Id = Guid.NewGuid(),
+                Id = guid,
                 Name = model.Name,
                 Surname = model.Surname,
                 UserName = model.Username,
                 Email = model.Email,
+                CreatedByUserId = guid.ToString()
             }, model.Password);
 
             CreateUserResponse response = new() { Succeeded = identityResult.Succeeded };
