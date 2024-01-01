@@ -22,6 +22,7 @@ namespace YetDit.API.Controllers
             LoginUserCommandResponse response = await _mediator.Send(loginUserCommandRequest);
             return Ok(response);
         }
+
         [HttpPost("[action]")]
         public async Task<IActionResult> RefreshTokenLogin([FromForm] RefreshTokenLoginCommandRequest refreshTokenLoginCommandRequest)
         {
