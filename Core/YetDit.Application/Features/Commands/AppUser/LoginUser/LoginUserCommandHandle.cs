@@ -13,6 +13,6 @@ namespace YetDit.Application.Features.Commands.AppUser.LoginUser
         }
 
         public async Task<LoginUserCommandResponse> Handle(LoginUserCommandRequest request, CancellationToken cancellationToken) =>
-            (LoginUserCommandResponse)(await _authentication.LoginAsync(request.Email, request.Password));
+            new() { Token = await _authentication.LoginAsync(request.Email, request.Password, 160) };
     }
 }
