@@ -17,10 +17,9 @@ namespace YetDit.Persistence.Repositories
 
         public DbSet<T> Table => _context.Set<T>();
 
-        public async Task<TId> AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            EntityEntry<T> entityEntry = await Table.AddAsync(entity);
-            return entityEntry.Entity.Id;
+            await Table.AddAsync(entity);
         }
 
         public async Task<bool> RemoveAsync(TId id)

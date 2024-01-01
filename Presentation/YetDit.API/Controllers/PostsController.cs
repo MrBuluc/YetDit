@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using YetDit.Application.Features.Commands.Post.CreatePost;
 using YetDit.Application.Features.Queries.Post.GetAllPost;
 using YetDit.Application.Features.Queries.Post.GetByIdPost;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace YetDit.API.Controllers
 {
@@ -16,15 +18,22 @@ namespace YetDit.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetAllPostQueryRequest request)
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllPosts([FromQuery] GetAllPostQueryRequest request)
         {
             return Ok(await _mediator.Send(request));
         }
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetById([FromRoute] GetByIdPostQueryRequest request)
+        [HttpGet("[action]/{Id}")]
+        public async Task<IActionResult> GetByIdPost([FromRoute] GetByIdPostQueryRequest request)
         {
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreatePost(CreatePostCommandRequest request, [FromHeader] string accessToken)
+        {
+            request.Claim = new JwtSecurityToken(accessToken).Claims.ToList()[0];
             return Ok(await _mediator.Send(request));
         }
     }

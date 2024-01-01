@@ -40,6 +40,8 @@ namespace YetDit.Persistence.Services.AuthServices
             {
                 Token token = _tokenHandler.CreateAccessToken(accessTokenLifeTime, appUser);
                 await _userService.UpdateRefreshToken(token.RefreshToken, appUser, token.Expiration, 40);
+                await _userManager.AddClaimAsync(appUser, new("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", appUser.UserName!));
+
                 return token;
 
             }

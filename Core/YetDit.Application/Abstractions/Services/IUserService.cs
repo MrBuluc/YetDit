@@ -1,4 +1,5 @@
-﻿using YetDit.Application.DTOs.User;
+﻿using System.Security.Claims;
+using YetDit.Application.DTOs.User;
 using YetDit.Domain.Identity;
 
 namespace YetDit.Application.Abstractions.Services
@@ -7,5 +8,6 @@ namespace YetDit.Application.Abstractions.Services
     {
         Task<CreateUserResponse> CreateAsync(CreateUserModel user);
         Task UpdateRefreshToken(string refreshToken, AppUser user, DateTime accessTokenDate, int addOnAccessTokenDateSeconds);
+        Task<Guid> GetIdFromClaim(Claim claim);
     }
 }

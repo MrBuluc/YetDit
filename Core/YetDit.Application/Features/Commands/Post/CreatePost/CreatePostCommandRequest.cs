@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Security.Claims;
 
 namespace YetDit.Application.Features.Commands.Post.CreatePost
 {
@@ -6,6 +7,6 @@ namespace YetDit.Application.Features.Commands.Post.CreatePost
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public string UserId { get; set; }
+        public Claim? Claim { get; set; }
     }
 }

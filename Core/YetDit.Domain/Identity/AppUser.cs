@@ -24,5 +24,10 @@ namespace YetDit.Domain.Identity
 
         public ICollection<Post> Posts { get; set; }
         public ICollection<Comment> Comments { get; set; }
+
+        public override string ToString()
+        {
+            return $"AppUser {{Id: {Id}, Name: {Name}, Surname: {Surname}, Username: {UserName}}}";
+        }
     }
 }

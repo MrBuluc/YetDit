@@ -7,9 +7,6 @@
 
         }
 
-        public NotFoundUserException(string errorMessage)
-        {
-
-        }
+        public NotFoundUserException(string errorMessage) : base(errorMessage) { }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using YetDit.Application.Abstractions.Services;
 using YetDit.Application.DTOs.User;
 using YetDit.Application.Exceptions;
@@ -38,6 +40,11 @@ namespace YetDit.Persistence.Services
                     response.Message += $"{error.Code} - {error.Description}\n";
 
             return response;
+        }
+
+        public async Task<Guid> GetIdFromClaim(Claim claim)
+        {
+            return (await _userManager.GetUsersForClaimAsync(claim)).First().Id;
         }
 
         public async Task UpdateRefreshToken(string refreshToken, AppUser user, DateTime accessTokenDate, int addOnAccessTokenDateSeconds)
