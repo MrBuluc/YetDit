@@ -18,17 +18,20 @@ namespace YetDit.Application.Features.Queries.Post.GetByIdPost
             Domain.Entities.Post? post = await _readRepository.GetByIdAsync(request.Id);
             if (post is not null)
             {
-                return new()
+                if (!post.IsDeleted)
                 {
-                    Id = post.Id,
-                    Title = post.Title,
-                    Description = post.Description,
-                    UpVoteCount = post.UpVoteCount,
-                    UserId = post.UserId.ToString(),
-                    Comments = post.Comments,
-                    CreatedOn = post.CreatedOn,
-                    UpdatedOn = post.ModifiedOn
-                };
+                    return new()
+                    {
+                        Id = post.Id,
+                        Title = post.Title,
+                        Description = post.Description,
+                        UpVoteCount = post.UpVoteCount,
+                        UserId = post.UserId.ToString(),
+                        Comments = post.Comments,
+                        CreatedOn = post.CreatedOn,
+                        UpdatedOn = post.ModifiedOn
+                    };
+                }
             }
 
             throw new NotFoundPostException();

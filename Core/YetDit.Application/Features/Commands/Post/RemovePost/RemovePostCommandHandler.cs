@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using YetDit.Application.Abstractions.Services;
 using YetDit.Application.Exceptions;
 using YetDit.Application.Repositories.Post;
 
@@ -8,31 +9,38 @@ namespace YetDit.Application.Features.Commands.Post.RemovePost
     {
         private readonly IPostWriteRepository _writeRepository;
         private readonly IPostReadRepository _readRepository;
+        private readonly IUserService _userService;
 
-        public RemovePostCommandHandler(IPostWriteRepository writeRepository, IPostReadRepository readRepository)
+        public RemovePostCommandHandler(IPostWriteRepository writeRepository, IPostReadRepository readRepository, IUserService userService)
         {
             _writeRepository = writeRepository;
             _readRepository = readRepository;
+            _userService = userService;
         }
 
         public async Task<RemovePostCommandResponse> Handle(RemovePostCommandRequest request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
-            if (!post.IsDeleted)
+            Domain.Entities.Post? post = await _readRepository.GetByIdAsync(request.Id);
+            if (post is not null)
             {
-                if (post.UserId.ToString() == request.UserId)
+                if (!post.IsDeleted)
                 {
-                    post.DeletedByUserId = request.UserId;
-                    post.DeletedOn = DateTime.UtcNow;
-                    post.IsDeleted = true;
-                    await _writeRepository.SaveAsync();
+                    Guid userId = await _userService.GetIdFromClaim(request.Claim);
+                    if (post.UserId == userId)
+                    {
+                        post.DeletedByUserId = userId.ToString();
+                        post.DeletedOn = DateTime.UtcNow;
+                        post.IsDeleted = true;
+                        await _writeRepository.SaveAsync();
+                    }
+                    throw new NotBelongsToUserException("Post");
                 }
-                throw new NotBelongsToUserException("Comment");
+                return new()
+                {
+                    Succeeded = true,
+                };
             }
-            return new()
-            {
-                Succeeded = true,
-            };
+            throw new NotFoundPostException();
         }
     }
 }

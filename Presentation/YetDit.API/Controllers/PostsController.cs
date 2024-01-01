@@ -5,6 +5,7 @@ using YetDit.Application.Features.Queries.Post.GetAllPost;
 using YetDit.Application.Features.Queries.Post.GetByIdPost;
 using System.IdentityModel.Tokens.Jwt;
 using YetDit.Application.Features.Commands.Post.UpdatePost;
+using YetDit.Application.Features.Commands.Post.RemovePost;
 
 namespace YetDit.API.Controllers
 {
@@ -40,6 +41,13 @@ namespace YetDit.API.Controllers
 
         [HttpPut("[action]")]
         public async Task<IActionResult> UpdatePost(UpdatePostCommandRequest request, [FromHeader] string accessToken)
+        {
+            request.Claim = new JwtSecurityToken(accessToken).Claims.First();
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpDelete("[action]/{Id}")]
+        public async Task<IActionResult> DeletePost([FromRoute] RemovePostCommandRequest request, [FromHeader] string accessToken)
         {
             request.Claim = new JwtSecurityToken(accessToken).Claims.First();
             return Ok(await _mediator.Send(request));
