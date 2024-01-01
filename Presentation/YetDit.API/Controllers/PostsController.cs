@@ -6,6 +6,7 @@ using YetDit.Application.Features.Queries.Post.GetByIdPost;
 using System.IdentityModel.Tokens.Jwt;
 using YetDit.Application.Features.Commands.Post.UpdatePost;
 using YetDit.Application.Features.Commands.Post.RemovePost;
+using YetDit.Application.Features.Commands.Post.DecrementUpVoteCountPost;
 
 namespace YetDit.API.Controllers
 {
@@ -50,6 +51,13 @@ namespace YetDit.API.Controllers
         public async Task<IActionResult> DeletePost([FromRoute] RemovePostCommandRequest request, [FromHeader] string accessToken)
         {
             request.Claim = new JwtSecurityToken(accessToken).Claims.First();
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpPut("[action]/{Id}")]
+        public async Task<IActionResult> DecrementUpVoteCountPost([FromRoute]DecrementUpVoteCountPostCommandRequest request, [FromHeader] string accessToken)
+        {
+            request.Claim = new JwtSecurityToken (accessToken).Claims.First();
             return Ok(await _mediator.Send(request));
         }
     }

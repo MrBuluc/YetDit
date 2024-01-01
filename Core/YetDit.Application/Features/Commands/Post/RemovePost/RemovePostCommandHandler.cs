@@ -40,7 +40,7 @@ namespace YetDit.Application.Features.Commands.Post.RemovePost
                     Succeeded = true,
                 };
             }
-            throw new NotFoundPostException();
+            throw new NotFoundException("Post");
         }
     }
 }

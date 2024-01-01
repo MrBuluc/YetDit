@@ -34,7 +34,7 @@ namespace YetDit.Application.Features.Queries.Post.GetByIdPost
                 }
             }
 
-            throw new NotFoundPostException();
+            throw new NotFoundException("Post");
         }
     }
 }

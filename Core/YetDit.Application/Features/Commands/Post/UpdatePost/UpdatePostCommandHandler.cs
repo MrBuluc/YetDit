@@ -44,7 +44,7 @@ namespace YetDit.Application.Features.Commands.Post.UpdatePost
                     Succeeded = false
                 };
             }
-            throw new NotFoundPostException();
+            throw new NotFoundException("Post");
         }
     }
 }
