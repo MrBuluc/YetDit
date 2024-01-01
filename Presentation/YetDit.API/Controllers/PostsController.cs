@@ -4,6 +4,7 @@ using YetDit.Application.Features.Commands.Post.CreatePost;
 using YetDit.Application.Features.Queries.Post.GetAllPost;
 using YetDit.Application.Features.Queries.Post.GetByIdPost;
 using System.IdentityModel.Tokens.Jwt;
+using YetDit.Application.Features.Commands.Post.UpdatePost;
 
 namespace YetDit.API.Controllers
 {
@@ -33,7 +34,14 @@ namespace YetDit.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreatePost(CreatePostCommandRequest request, [FromHeader] string accessToken)
         {
-            request.Claim = new JwtSecurityToken(accessToken).Claims.ToList()[0];
+            request.Claim = new JwtSecurityToken(accessToken).Claims.First();
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> UpdatePost(UpdatePostCommandRequest request, [FromHeader] string accessToken)
+        {
+            request.Claim = new JwtSecurityToken(accessToken).Claims.First();
             return Ok(await _mediator.Send(request));
         }
     }

@@ -15,18 +15,19 @@ namespace YetDit.Application.Features.Commands.Comment.CreateComment
 
         public async Task<CreateCommentCommandResponse> Handle(CreateCommentCommandRequest request, CancellationToken cancellationToken)
         {
-            Guid commentId = await _writeRepository.AddAsync(new()
+            Domain.Entities.Comment comment = new()
             {
                 Content = request.Content,
                 UserId = Guid.Parse(request.UserId),
                 PostId = request.PostId,
                 CreatedByUserId = request.UserId
-            });
+            };
+            await _writeRepository.AddAsync(comment);
             await _writeRepository.SaveAsync();
             return new()
             {
                 StatusCode = (int)HttpStatusCode.Created,
-                CommentId = commentId.ToString(),
+                CommentId = comment.Id.ToString(),
             };
         }
     }
