@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using YetDit.Application.Features.Commands.Post.UpdatePost;
 using YetDit.Application.Features.Commands.Post.RemovePost;
 using YetDit.Application.Features.Commands.Post.DecrementUpVoteCountPost;
+using YetDit.Application.Features.Commands.Post.IncrementUpVoteCount;
 
 namespace YetDit.API.Controllers
 {
@@ -60,5 +61,8 @@ namespace YetDit.API.Controllers
             request.Claim = new JwtSecurityToken (accessToken).Claims.First();
             return Ok(await _mediator.Send(request));
         }
+
+        /*[HttpPut("[action]/{Id}")]
+        public async Task<IActionResult> IncrementUpVoteCountPost([FromRoute] IncrementUpVoteCountPostCommandRequest)*/
     }
 }
