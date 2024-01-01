@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using YetDit.Application.Features.Queries.Post.GetAllPost;
+using YetDit.Application.Features.Queries.Post.GetByIdPost;
 
 namespace YetDit.API.Controllers
 {
@@ -17,6 +18,12 @@ namespace YetDit.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllPostQueryRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdPostQueryRequest request)
         {
             return Ok(await _mediator.Send(request));
         }

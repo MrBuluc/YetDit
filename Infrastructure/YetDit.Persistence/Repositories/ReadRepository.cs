@@ -32,7 +32,7 @@ namespace YetDit.Persistence.Repositories
             return await Table.FirstOrDefaultAsync(metot);
         }
 
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<T?> GetByIdAsync(string id)
         {
             // Ardından eşleşen varlığı getir
             return await Table.FirstOrDefaultAsync(data => data.Id.ToString() == id);

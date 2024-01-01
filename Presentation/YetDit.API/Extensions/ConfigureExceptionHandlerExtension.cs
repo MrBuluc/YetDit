@@ -23,7 +23,7 @@ namespace YetDit.API.Extensions
                         {
                             StatusCode = context.Response.StatusCode,
                             Message = contextFeature.Error.Message,
-                            Title = "Hata Alini!"
+                            Title = "Hata Alindi!"
                         }));
                     }
                 });

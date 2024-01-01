@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using YetDit.Application.Exceptions;
 using YetDit.Application.Repositories.Post;
 
 namespace YetDit.Application.Features.Queries.Post.GetByIdPost
@@ -14,18 +15,23 @@ namespace YetDit.Application.Features.Queries.Post.GetByIdPost
 
         public async Task<GetByIdPostQueryResponse> Handle(GetByIdPostQueryRequest request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
-            return new()
+            Domain.Entities.Post? post = await _readRepository.GetByIdAsync(request.Id);
+            if (post is not null)
             {
-                Id = post.Id,
-                Title = post.Title,
-                Description = post.Description,
-                UpVoteCount = post.UpVoteCount,
-                UserId = post.UserId.ToString(),
-                Comments = post.Comments,
-                CreatedOn = post.CreatedOn,
-                UpdatedOn = post.ModifiedOn
-            };
+                return new()
+                {
+                    Id = post.Id,
+                    Title = post.Title,
+                    Description = post.Description,
+                    UpVoteCount = post.UpVoteCount,
+                    UserId = post.UserId.ToString(),
+                    Comments = post.Comments,
+                    CreatedOn = post.CreatedOn,
+                    UpdatedOn = post.ModifiedOn
+                };
+            }
+
+            throw new NotFoundPostException();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace YetDit.Application.Repositories
         IQueryable<T> GetAll();
         IQueryable<T> GetWhere(Expression<Func<T, bool>> metot);
         Task<T> GetAsync(Expression<Func<T, bool>> metot);
-        Task<T> GetByIdAsync(string id);
+        Task<T?> GetByIdAsync(string id);
     }
 }
