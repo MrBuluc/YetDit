@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using YetDit.Application.Abstractions.Services;
 using YetDit.Application.Repositories.Post;
 
 namespace YetDit.Application.Features.Commands.Post.IncrementUpVoteCount
@@ -7,11 +8,14 @@ namespace YetDit.Application.Features.Commands.Post.IncrementUpVoteCount
     {
         private readonly IPostReadRepository _readRepository;
         private readonly IPostWriteRepository _writeRepository;
+        private readonly IUserService _userService;
 
-        public IncrementUpVoteCountPostCommandHandler(IPostReadRepository readRepository, IPostWriteRepository writeRepository)
+        public IncrementUpVoteCountPostCommandHandler(IPostReadRepository readRepository, IPostWriteRepository writeRepository, IUserService userService)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
+            _userService = userService;
+            _userService = userService;
         }
         public async Task<IncrementUpVoteCountPostCommandResponse> Handle(IncrementUpVoteCountPostCommandRequest request, CancellationToken cancellationToken)
         {
@@ -20,7 +24,7 @@ namespace YetDit.Application.Features.Commands.Post.IncrementUpVoteCount
             {
                 post.UpVoteCount++;
                 post.ModifiedOn = DateTime.UtcNow;
-                post.ModifiedByUserId = request.UserId;
+                post.ModifiedByUserId = (await _userService.GetIdFromClaim(request.Claim)).ToString();
                 await _writeRepository.SaveAsync();
                 return new()
                 {
