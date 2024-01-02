@@ -62,7 +62,17 @@ namespace YetDit.API.Controllers
             return Ok(await _mediator.Send(request));
         }
 
-        /*[HttpPut("[action]/{Id}")]
-        public async Task<IActionResult> IncrementUpVoteCountPost([FromRoute] IncrementUpVoteCountPostCommandRequest)*/
+        [HttpPut("[action]/{Id}")]
+        public async Task<IActionResult> IncrementUpVoteCountPost([FromRoute] string Id, [FromHeader] string accessToken)
+        {
+            var _request = new IncrementUpVoteCountPostCommandRequest
+            {
+                Id = Id,
+                UserId = new JwtSecurityToken(accessToken).Claims.First(c => c.Type == "sub").Value // Assuming "sub" contains the user ID in the token
+            };
+
+            var result = await _mediator.Send(_request);
+            return Ok(result);
+        }
     }
 }
