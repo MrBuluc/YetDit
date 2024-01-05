@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using YetDit.Application.Features.Commands.Comment.CreateComment;
+using YetDit.Application.Features.Commands.Comment.RemoveComment;
 using YetDit.Application.Features.Commands.Comment.UpdateComment;
 using YetDit.Application.Features.Commands.Post.CreatePost;
+using YetDit.Application.Features.Commands.Post.RemovePost;
 using YetDit.Application.Features.Commands.Post.UpdatePost;
 using YetDit.Application.Features.Queries.Post.GetAllPost;
 
@@ -31,6 +33,13 @@ namespace YetDit.API.Controllers
 
         [HttpPut("[action]")]
         public async Task<IActionResult> UpdateComment(UpdateCommentCommandRequest request, [FromHeader] string accessToken)
+        {
+            request.Claim = new JwtSecurityToken(accessToken).Claims.First();
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpDelete("[action]/{Id}")]
+        public async Task<IActionResult> DeleteComment([FromRoute] RemoveCommentCommandRequest request, [FromHeader] string accessToken)
         {
             request.Claim = new JwtSecurityToken(accessToken).Claims.First();
             return Ok(await _mediator.Send(request));
