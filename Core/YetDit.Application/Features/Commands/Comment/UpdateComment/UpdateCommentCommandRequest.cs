@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using System.Security.Claims;
 
 namespace YetDit.Application.Features.Commands.Comment.UpdateComment
 {
@@ -6,6 +7,6 @@ namespace YetDit.Application.Features.Commands.Comment.UpdateComment
     {
         public string Id { get; set; }
         public string Content { get; set; }
-        public string UserId { get; set; }
+        public Claim? Claim { get; set; }
     }
 }

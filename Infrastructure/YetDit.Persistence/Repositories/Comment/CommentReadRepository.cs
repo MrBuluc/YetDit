@@ -1,4 +1,5 @@
-﻿using YetDit.Application.Repositories.Comment;
+﻿using Microsoft.EntityFrameworkCore;
+using YetDit.Application.Repositories.Comment;
 using YetDit.Persistence.Contexts;
 
 namespace YetDit.Persistence.Repositories.Comment

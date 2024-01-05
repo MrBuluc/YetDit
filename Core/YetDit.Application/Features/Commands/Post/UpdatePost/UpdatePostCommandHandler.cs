@@ -20,6 +20,7 @@ namespace YetDit.Application.Features.Commands.Post.UpdatePost
         public async Task<UpdatePostCommandResponse> Handle(UpdatePostCommandRequest request, CancellationToken cancellationToken)
         {
             Domain.Entities.Post? post = await _readRepository.GetByIdAsync(request.Id);
+            
             if (post is not null)
             {
                 if (!post.IsDeleted)

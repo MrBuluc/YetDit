@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using YetDit.Application.Abstractions.Services;
 using YetDit.Application.Exceptions;
 using YetDit.Application.Repositories.Comment;
 
@@ -8,22 +9,29 @@ namespace YetDit.Application.Features.Commands.Comment.UpdateComment
     {
         private readonly ICommentReadRepository _readRepository;
         private readonly ICommentWriteRepository _writeRepository;
+        private readonly IUserService _userService;
 
-        public UpdateCommentCommandHandler(ICommentWriteRepository writeRepository, ICommentReadRepository readRepository)
+        public UpdateCommentCommandHandler(ICommentWriteRepository writeRepository, ICommentReadRepository readRepository, IUserService userService)
         {
             _writeRepository = writeRepository;
             _readRepository = readRepository;
+            _userService = userService;
         }
 
         public async Task<UpdateCommentCommandResponse> Handle(UpdateCommentCommandRequest request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Comment comment = await _readRepository.GetByIdAsync(request.Id);
+            
+            Domain.Entities.Comment? comment = await _readRepository.GetByIdAsync(request.Id);
+
+            if (comment is null) throw new NotFoundException("Comment");
+
             if (!comment.IsDeleted)
             {
-                if (comment.UserId.ToString() == request.UserId)
+                Guid userId = await _userService.GetIdFromClaim(request.Claim!);
+                if (comment.UserId == userId)
                 {
                     comment.Content = request.Content == "" ? comment.Content : request.Content;
-                    comment.ModifiedByUserId = request.UserId;
+                    comment.ModifiedByUserId = userId.ToString();
                     await _writeRepository.SaveAsync();
                     return new()
                     {
