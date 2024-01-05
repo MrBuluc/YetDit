@@ -14,7 +14,9 @@ using YetDit.Application.Features.Commands.Post.IncrementUpVoteCount;
 using YetDit.Application.Features.Commands.Post.RemovePost;
 using YetDit.Application.Features.Commands.Post.UpdatePost;
 using YetDit.Application.Features.Queries.Comment.GetAllComments;
+using YetDit.Application.Features.Queries.Comment.GetByIdComment;
 using YetDit.Application.Features.Queries.Post.GetAllPost;
+using YetDit.Application.Features.Queries.Post.GetByIdPost;
 
 namespace YetDit.API.Controllers
 {
@@ -30,6 +32,11 @@ namespace YetDit.API.Controllers
         }
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAllComments([FromQuery] GetAllCommentsQueryRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+        [HttpGet("[action]/{Id}")]
+        public async Task<IActionResult> GetByIdComment([FromRoute] GetByIdCommentQueryRequest request)
         {
             return Ok(await _mediator.Send(request));
         }
