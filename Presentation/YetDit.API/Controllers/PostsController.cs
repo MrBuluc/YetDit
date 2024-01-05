@@ -28,8 +28,8 @@ namespace YetDit.API.Controllers
             return Ok(await _mediator.Send(request));
         }
 
-        [HttpGet("[action]/{Id}")]
-        public async Task<IActionResult> GetByIdPost([FromRoute] GetByIdPostQueryRequest request)
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByIdPost([FromQuery] GetByIdPostQueryRequest request)
         {
             return Ok(await _mediator.Send(request));
         }
