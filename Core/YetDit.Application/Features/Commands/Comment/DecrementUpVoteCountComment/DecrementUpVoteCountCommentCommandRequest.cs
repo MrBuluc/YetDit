@@ -6,6 +6,6 @@ namespace YetDit.Application.Features.Commands.Comment.DecrementUpVoteCountComme
     public class DecrementUpVoteCountCommentCommandRequest : IRequest<DecrementUpVoteCountCommentCommandResponse>
     {
         public string Id { get; set; }
-        public Claim Claim { get; set; }
+        public Claim? Claim { get; set; }
     }
 }

@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using YetDit.Application.Features.Commands.Comment.CreateComment;
+using YetDit.Application.Features.Commands.Comment.DecrementUpVoteCountComment;
+using YetDit.Application.Features.Commands.Comment.IncrementUpVoteCountComment;
 using YetDit.Application.Features.Commands.Comment.RemoveComment;
 using YetDit.Application.Features.Commands.Comment.UpdateComment;
 using YetDit.Application.Features.Commands.Post.CreatePost;
+using YetDit.Application.Features.Commands.Post.DecrementUpVoteCountPost;
+using YetDit.Application.Features.Commands.Post.IncrementUpVoteCount;
 using YetDit.Application.Features.Commands.Post.RemovePost;
 using YetDit.Application.Features.Commands.Post.UpdatePost;
 using YetDit.Application.Features.Queries.Post.GetAllPost;
@@ -40,6 +44,20 @@ namespace YetDit.API.Controllers
 
         [HttpDelete("[action]/{Id}")]
         public async Task<IActionResult> DeleteComment([FromRoute] RemoveCommentCommandRequest request, [FromHeader] string accessToken)
+        {
+            request.Claim = new JwtSecurityToken(accessToken).Claims.First();
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpPut("[action]/{Id}")]
+        public async Task<IActionResult> DecrementUpVoteCountComment([FromRoute] DecrementUpVoteCountCommentCommandRequest request, [FromHeader] string accessToken)
+        {
+            request.Claim = new JwtSecurityToken(accessToken).Claims.First();
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpPut("[action]/{Id}")]
+        public async Task<IActionResult> IncrementUpVoteCountComment([FromRoute] IncrementUpVoteCountCommentCommandRequest request, [FromHeader] string accessToken)
         {
             request.Claim = new JwtSecurityToken(accessToken).Claims.First();
             return Ok(await _mediator.Send(request));
