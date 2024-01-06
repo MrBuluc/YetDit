@@ -25,14 +25,17 @@ namespace YetDit.Application.Features.Commands.Comment.DecrementUpVoteCountComme
             {
                 if (!comment.IsDeleted)
                 {
-                    comment.UpVoteCount--;
-                    comment.ModifiedByUserId = (await _userService.GetIdFromClaim(request.Claim)).ToString();
-                    await _writeRepository.SaveAsync();
-                    return new()
+                    if (!comment.Post.IsDeleted)
                     {
-                        Succeeded = true,
-                        NewUpVoteCount = comment.UpVoteCount
-                    };
+                        comment.UpVoteCount -= 1;
+                        comment.ModifiedByUserId = (await _userService.GetIdFromClaim(request.Claim!)).ToString();
+                        await _writeRepository.SaveAsync();
+                        return new()
+                        {
+                            Succeeded = true,
+                            NewUpVoteCount = comment.UpVoteCount
+                        };
+                    }
                 }
                 return new()
                 {
