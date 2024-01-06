@@ -20,7 +20,7 @@ namespace YetDit.Application.Features.Commands.Comment.UpdateComment
 
         public async Task<UpdateCommentCommandResponse> Handle(UpdateCommentCommandRequest request, CancellationToken cancellationToken)
         {
-            
+
             Domain.Entities.Comment? comment = await _readRepository.GetByIdAsync(request.Id);
 
             if (comment is null) throw new NotFoundException("Comment");
@@ -30,13 +30,17 @@ namespace YetDit.Application.Features.Commands.Comment.UpdateComment
                 Guid userId = await _userService.GetIdFromClaim(request.Claim!);
                 if (comment.UserId == userId)
                 {
-                    comment.Content = request.Content == "" ? comment.Content : request.Content;
-                    comment.ModifiedByUserId = userId.ToString();
-                    await _writeRepository.SaveAsync();
-                    return new()
+                    if (!comment.Post.IsDeleted)
                     {
-                        Succeeded = true,
-                    };
+                        comment.Content = request.Content == "" ? comment.Content : request.Content;
+                        comment.ModifiedByUserId = userId.ToString();
+                        await _writeRepository.SaveAsync();
+                        return new()
+                        {
+                            Succeeded = true,
+                        };
+                    }
+                    return new() { Succeeded = false, };
                 }
                 throw new NotBelongsToUserException("Comment");
             }

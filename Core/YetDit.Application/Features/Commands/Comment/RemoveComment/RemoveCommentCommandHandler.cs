@@ -2,7 +2,6 @@
 using YetDit.Application.Abstractions.Services;
 using YetDit.Application.Exceptions;
 using YetDit.Application.Repositories.Comment;
-using YetDit.Domain.Entities;
 
 namespace YetDit.Application.Features.Commands.Comment.RemoveComment
 {

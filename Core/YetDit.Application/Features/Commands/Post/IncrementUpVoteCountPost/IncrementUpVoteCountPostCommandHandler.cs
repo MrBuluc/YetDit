@@ -15,7 +15,6 @@ namespace YetDit.Application.Features.Commands.Post.IncrementUpVoteCount
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _userService = userService;
-            _userService = userService;
         }
         public async Task<IncrementUpVoteCountPostCommandResponse> Handle(IncrementUpVoteCountPostCommandRequest request, CancellationToken cancellationToken)
         {

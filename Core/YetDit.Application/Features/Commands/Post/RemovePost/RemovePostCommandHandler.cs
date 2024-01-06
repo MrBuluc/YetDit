@@ -25,13 +25,17 @@ namespace YetDit.Application.Features.Commands.Post.RemovePost
             {
                 if (!post.IsDeleted)
                 {
-                    Guid userId = await _userService.GetIdFromClaim(request.Claim);
+                    Guid userId = await _userService.GetIdFromClaim(request.Claim!);
                     if (post.UserId == userId)
                     {
                         post.DeletedByUserId = userId.ToString();
                         post.DeletedOn = DateTime.UtcNow;
                         post.IsDeleted = true;
                         await _writeRepository.SaveAsync();
+                        return new()
+                        {
+                            Succeeded = true
+                        };
                     }
                     throw new NotBelongsToUserException("Post");
                 }
