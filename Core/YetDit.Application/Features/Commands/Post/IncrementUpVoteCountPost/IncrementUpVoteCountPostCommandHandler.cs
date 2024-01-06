@@ -19,18 +19,21 @@ namespace YetDit.Application.Features.Commands.Post.IncrementUpVoteCount
         }
         public async Task<IncrementUpVoteCountPostCommandResponse> Handle(IncrementUpVoteCountPostCommandRequest request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Post post = await _readRepository.GetByIdAsync(request.Id);
-            if (!post.IsDeleted)
+            Domain.Entities.Post? post = await _readRepository.GetByIdAsync(request.Id);
+            if (post is not null)
             {
-                post.UpVoteCount++;
-                post.ModifiedOn = DateTime.UtcNow;
-                post.ModifiedByUserId = (await _userService.GetIdFromClaim(request.Claim)).ToString();
-                await _writeRepository.SaveAsync();
-                return new()
+                if (!post.IsDeleted)
                 {
-                    Succeeded = true,
-                    NewUpVoteCount = post.UpVoteCount,
-                };
+                    post.UpVoteCount += 1;
+                    post.ModifiedOn = DateTime.UtcNow;
+                    post.ModifiedByUserId = (await _userService.GetIdFromClaim(request.Claim!)).ToString();
+                    await _writeRepository.SaveAsync();
+                    return new()
+                    {
+                        Succeeded = true,
+                        NewUpVoteCount = post.UpVoteCount,
+                    };
+                }
             }
             return new() { Succeeded = false, };
         }
