@@ -16,7 +16,10 @@ namespace YetDit.Application.Features.Queries.Post.Get5PostRandomly
         {
             List<Domain.Entities.Post> posts = new();
             Random random = new();
-            List<Domain.Entities.Post> allPosts = _readRepository.GetAll().ToList();
+            List<PostId> allPosts = _readRepository.GetAll().Select(p => new PostId()
+            {
+                Id = p.Id,
+            }).ToList();
             int count = allPosts.Count;
             List<int> ids = new();
 
@@ -29,10 +32,10 @@ namespace YetDit.Application.Features.Queries.Post.Get5PostRandomly
                 }
 
                 ids.Add(index);
-                posts.Add(allPosts[index]);
+                posts.Add((await _readRepository.GetByIdAsync(allPosts[index].Id.ToString()))!);
             }
 
-            return new Get5PostRandomlyQueryResponse()
+            return new()
             {
                 Posts = posts.Select(p => new
                 {
@@ -46,5 +49,10 @@ namespace YetDit.Application.Features.Queries.Post.Get5PostRandomly
             };
 
         }
+    }
+
+    public class PostId
+    {
+        public int Id { get; set; }
     }
 }
