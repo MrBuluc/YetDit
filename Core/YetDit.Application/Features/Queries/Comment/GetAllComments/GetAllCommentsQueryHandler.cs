@@ -14,15 +14,15 @@ namespace YetDit.Application.Features.Queries.Comment.GetAllComments
 
         public Task<GetAllCommentsQueryResponse> Handle(GetAllCommentsQueryRequest request, CancellationToken cancellationToken)
         {
-            var comments = _readRepository.GetWhere(p => p.PostId == request.Id && p.IsDeleted == false).Select(p => new
+            var comments = _readRepository.GetWhere(c => c.PostId == request.Id && c.IsDeleted == false).Select(c => new
             {
-                p.Id,
-                p.PostId,
-                p.Content,
-                p.UserId,
-                p.UpVoteCount,
-                p.CreatedOn,
-                p.ModifiedOn
+                c.Id,
+                c.PostId,
+                c.Content,
+                c.UserId,
+                c.UpVoteCount,
+                c.CreatedOn,
+                c.ModifiedOn
             }).Skip(request.Page * request.Size).Take(request.Size);
 
             return Task.FromResult<GetAllCommentsQueryResponse>(new()
