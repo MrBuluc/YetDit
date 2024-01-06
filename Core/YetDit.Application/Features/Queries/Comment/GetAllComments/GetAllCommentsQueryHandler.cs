@@ -1,12 +1,5 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YetDit.Application.Features.Queries.Post.GetAllPost;
 using YetDit.Application.Repositories.Comment;
-using YetDit.Application.Repositories.Post;
 
 namespace YetDit.Application.Features.Queries.Comment.GetAllComments
 {

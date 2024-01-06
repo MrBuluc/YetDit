@@ -1,22 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using YetDit.Application.Features.Commands.Comment.CreateComment;
 using YetDit.Application.Features.Commands.Comment.DecrementUpVoteCountComment;
 using YetDit.Application.Features.Commands.Comment.IncrementUpVoteCountComment;
 using YetDit.Application.Features.Commands.Comment.RemoveComment;
 using YetDit.Application.Features.Commands.Comment.UpdateComment;
-using YetDit.Application.Features.Commands.Post.CreatePost;
-using YetDit.Application.Features.Commands.Post.DecrementUpVoteCountPost;
-using YetDit.Application.Features.Commands.Post.IncrementUpVoteCount;
-using YetDit.Application.Features.Commands.Post.RemovePost;
-using YetDit.Application.Features.Commands.Post.UpdatePost;
 using YetDit.Application.Features.Queries.Comment.GetAllComments;
 using YetDit.Application.Features.Queries.Comment.GetByIdComment;
-using YetDit.Application.Features.Queries.Post.GetAllPost;
-using YetDit.Application.Features.Queries.Post.GetByIdPost;
 
 namespace YetDit.API.Controllers
 {
