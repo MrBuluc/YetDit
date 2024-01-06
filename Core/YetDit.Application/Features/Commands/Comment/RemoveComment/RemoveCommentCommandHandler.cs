@@ -32,7 +32,7 @@ namespace YetDit.Application.Features.Commands.Comment.RemoveComment
                     comment.DeletedOn = DateTime.UtcNow;
                     comment.IsDeleted = true;
                     await _writeRepository.SaveAsync();
-
+                    return new() { Succeeded = true };
                 }
                 else throw new NotBelongsToUserException("Comment");
             }
