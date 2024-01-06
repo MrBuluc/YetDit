@@ -8,6 +8,7 @@ using YetDit.Application.Features.Commands.Post.UpdatePost;
 using YetDit.Application.Features.Commands.Post.RemovePost;
 using YetDit.Application.Features.Commands.Post.DecrementUpVoteCountPost;
 using YetDit.Application.Features.Commands.Post.IncrementUpVoteCount;
+using YetDit.Application.Features.Queries.Post.Get5PostRandomly;
 
 namespace YetDit.API.Controllers
 {
@@ -27,9 +28,13 @@ namespace YetDit.API.Controllers
         {
             return Ok(await _mediator.Send(request));
         }
-
-        [HttpGet("[action]/{Id}")]
-        public async Task<IActionResult> GetByIdPost([FromRoute] GetByIdPostQueryRequest request)
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Get5RandomPosts([FromQuery] Get5PostRandomlyQueryRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByIdPost([FromQuery] GetByIdPostQueryRequest request)
         {
             return Ok(await _mediator.Send(request));
         }

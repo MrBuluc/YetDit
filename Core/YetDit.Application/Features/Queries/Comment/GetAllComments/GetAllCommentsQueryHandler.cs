@@ -24,6 +24,7 @@ namespace YetDit.Application.Features.Queries.Comment.GetAllComments
                 p.CreatedOn,
                 p.ModifiedOn
             }).Skip(request.Page * request.Size).Take(request.Size);
+
             return Task.FromResult<GetAllCommentsQueryResponse>(new()
             {
                 Comments = comments,
