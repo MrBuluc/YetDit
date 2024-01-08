@@ -18,3 +18,8 @@ This is a Reddit API for YetGen. Once registered, YetGeners can share new posts 
 ## Task Breakdown
 - ### [Hakkıcan Bülüç](https://github.com/MrBuluc)
     RepositoryPattern, Entities, Controllers, Request and Response models, AuthService
+- ### [Celal Karahan](https://github.com/k-celal)
+    - Controllers:
+        - Contributed to the implementation of the Controllers in the project.
+    - Infrastructure Layer:
+        - Participated in setting up the persistence layer in the Infrastructure, focusing on database connection processes.
