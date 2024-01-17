@@ -23,3 +23,5 @@ This is a Reddit API for YetGen. Once registered, YetGeners can share new posts 
         - Contributed to the implementation of the Controllers in the project.
     - Infrastructure Layer:
         - Participated in setting up the persistence layer in the Infrastructure, focusing on database connection processes.
+- ### [Tarık Emir Kaldırım](https://github.com/tarikemir)
+    - Comments/Post Controllers, Queries, Authentication
